@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+	<title>Jogo da Velha</title>
+</head>
+<body>
+	<div class="centered">
+		<h3 class="text-red" id="labelJogador1">Jogador 1(X - Vermelho): <b id="jogador1"></b></h3> 
+		<h3 class="text-blue" id="labelJogador2">Jogador 2(O - Azul):     <b id="jogador2"></b></h3> 
+		<table id="table_game" style="border: 1px solid">
+			<thead>
+				<tr>
+					<th colspan="3">Teste</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id='1' class="size"></td>
+					<td id='2' class="size "></td>
+					<td id='3' class="size "></td>
+				</tr>
+				<tr>
+					<td id='4' class="size "></td>
+					<td id='5' class="size "></td>
+					<td id='6' class="size "></td>
+				</tr>
+				<tr>
+					<td id='7' class="size "></td>
+					<td id='8' class="size "></td>
+					<td id='9' class="size "></td>
+				</tr>
+				<p></p>
+			</tbody>
+		</table>
+	</div
+	<button onclick="reset();">Resetar</button>
+</body>
+
+<script>
+	var nomeJogador1 = '11'//window.prompt("Enter your name","defaultText");
+	var nomeJogador2 = '22'//window.prompt("sometext","defaultText");
+	var player = 1;
+	var jogadas1 = [];
+	var jogadas2 = [];
+
+	// Adiciona o nome dos jogadores na tela.
+	$("#jogador1").append(nomeJogador1);
+	$("#jogador2").append(nomeJogador2);
+
+	function reset(){
+		// location.reload();
+		$("tr").empty();
+	}
+
+	function verificaJogadas(jogador) {
+
+		comb = [ [1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7] ]
+
+    for( var j = 0; j < comb.length; j++ ) {
+    	var count = 0
+    	for (var i = 0; i < 3; i++) {
+    		if ( $( "#" + comb[j][i] ).text() == jogador ) {
+    			count += 1;
+		    	if( count == 3 ) {
+		    		var winner = "";
+
+		    		if( jogador == "X"){
+		    			winner = nomeJogador1
+		    		} else{
+							winner = nomeJogador2
+		    		}
+
+		    		alert(winner + " Ganhou!! Jogue novamente");
+		    		// reset();
+		    		break;
+		    	}
+    		}
+    	}
+    }
+	}
+
+	$("td.size").click(function(){
+		if( player % 2 != 0 ){
+			$(this).append("X").css('text-align','center');
+			$(this).addClass('bg-red-color');
+
+			jogadas1.push( parseInt( $(this).attr('id') ) );
+
+			if( jogadas1.length > 2 ) {
+				setTimeout(function() { verificaJogadas("X"); }, 100);
+			}
+
+		} else{
+			$(this).append("O").css('text-align','center');
+			$(this).addClass('bg-blue-color');
+
+			jogadas2.push( parseInt( $(this).attr('id') ) );
+
+			if( jogadas2.length > 2 ) {
+				setTimeout(function() { verificaJogadas("O"); }, 100);
+			}
+		}
+
+		// Troca de jogador
+		player +=1;
+	});
+</script>

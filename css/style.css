@@ -1,0 +1,33 @@
+.size {
+	width:200px;
+	height:100px;
+}
+
+td {
+	border: 1px solid;
+}
+
+div.centered table {
+  margin: 0 auto; 
+  text-align: left;
+}
+
+div.centered {
+  text-align: center;
+}
+
+.bg-red-color {
+	background-color: #e57f7f;
+}
+
+.bg-blue-color {
+	background-color: #bbe9f0;
+}
+
+.text-red {
+	color: #e57f7f;
+}
+
+.text-blue {
+	color: #95bac0;
+}
