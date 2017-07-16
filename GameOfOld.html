@@ -37,24 +37,28 @@
 				<p></p>
 			</tbody>
 		</table>
-	</div
-	<button onclick="reset();">Resetar</button>
+		<p></p>
+		<button onclick="reset();" class="btn-size">Resetar</button>
+	</div>
 </body>
 
 <script>
-	var nomeJogador1 = '11'//window.prompt("Enter your name","defaultText");
-	var nomeJogador2 = '22'//window.prompt("sometext","defaultText");
+	var nomeJogador1 = window.prompt("Enter your name","defaultText");
+	var nomeJogador2 = window.prompt("sometext","defaultText");
 	var player = 1;
 	var jogadas1 = [];
 	var jogadas2 = [];
+	var numJogadas = 0;
 
 	// Adiciona o nome dos jogadores na tela.
 	$("#jogador1").append(nomeJogador1);
 	$("#jogador2").append(nomeJogador2);
 
 	function reset(){
-		// location.reload();
-		$("tr").empty();
+		$("td.size").empty();
+		$("td.size").removeClass("bg-red-color");
+		$("td.size").removeClass("bg-blue-color");
+		player = 1;
 	}
 
 	function verificaJogadas(jogador) {
@@ -66,7 +70,7 @@
     	for (var i = 0; i < 3; i++) {
     		if ( $( "#" + comb[j][i] ).text() == jogador ) {
     			count += 1;
-		    	if( count == 3 ) {
+		    	if ( count == 3 ) {
 		    		var winner = "";
 
 		    		if( jogador == "X"){
@@ -74,9 +78,8 @@
 		    		} else{
 							winner = nomeJogador2
 		    		}
-
 		    		alert(winner + " Ganhou!! Jogue novamente");
-		    		// reset();
+		    		reset();
 		    		break;
 		    	}
     		}
@@ -108,5 +111,23 @@
 
 		// Troca de jogador
 		player +=1;
+		console.log(player);
+
+		if (player > 9) {
+			setTimeout(function(){
+				alert("Deu Velha! Ninguém Ganhou, jogue novamente!!");
+				reset();
+			}, 100);
+		}
 	});
 </script>
+
+
+
+
+
+
+
+
+
+
